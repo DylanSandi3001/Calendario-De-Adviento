@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Adviento</title>
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6e6f7; /* Color lavanda suave */
+            color: #444;
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Contenedor principal */
+        .container {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff92a9;
+            font-size: 2em;
+            margin-bottom: 10px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        p#date {
+            color: #777;
+            font-size: 1em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .quote {
+            background: #ffeef3;
+            border-left: 5px solid #ff92a9;
+            padding: 10px;
+            font-size: 1.1em;
+            color: #ff92a9;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Animaciones de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Fondo de copos de nieve */
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1.5em;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite, sway 4s ease-in-out infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>🎄 Calendario de Adviento 🎄</h1>
+        <p id="date"></p>
+        <div class="quote" id="quote"></div>
+    </div>
+
+    <!-- Script para los copos de nieve -->
+    <script>
+        // Generar copos de nieve en el fondo
+        const snowflakeCount = 150; // Aumentamos la cantidad de copos
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄';
+
+            // Posicionar los copos en posiciones aleatorias en todo el ancho de la pantalla
+            snowflake.style.left = Math.random() * 100 + 'vw'; // Posiciona en el ancho completo
+            snowflake.style.top = Math.random() * 100 + 'vh'; // Posiciona en el alto completo
+
+            // Duración aleatoria para caída
+            snowflake.style.animationDuration = (Math.random() * 10 + 5) + 's';  
+
+            // Tamaño aleatorio de los copos
+            snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';  
+
+            // Usamos un retardo aleatorio para que los copos no caigan al mismo tiempo
+            snowflake.style.animationDelay = Math.random() * 10 + 's';  
+
+            document.body.appendChild(snowflake);
+        }
+    </script>
+
+    <!-- Script principal -->
+    <script>
+        // Mensajes únicos para cada día
+        const messages = {
+            8: "Hoy es un buen día para recordar lo perfecta que eres 💖",
+            9: "Sonríe siempre, tienes la sonrisa más linda del mundo 🫶🏼",
+            10: "Cada día contigo es un regalo que nunca dejo de apreciar 🎁",
+            11: "Te ves preciosa hoy, mejor dicho todos los días 💖",
+            12: "Los pequeños momentos contigo son los más grandes para mí 💕",
+            13: "Viernes 13, un día famoso por la mala suerte pero en tu caso, no hay nada de malo, porque contigo siempre me siento afortunado 🍀",
+            14: "Tu luz hace que todo a tu alrededor sea mágico ✨",
+            15: "El mundo necesita más personas como tú 🌸",
+            16: "¿Cómo haces para verte más guapa cada día? 😍",
+            17: "Cada detalle que haces tiene un toque especial, como tú 🎀",
+            18: "El calor de tu corazón es más cálido que cualquier chimenea 🔥",
+            19: "Hoy recuerda que eres amada, valorada y especial 💖",
+            20: "Tu bondad y ternura hacen el mundo un lugar mejor 🌟",
+            21: "Si te sientes sola, recuerda que me tienes a mí, yo NUNCA me voy a ir 💫",
+            22: "El amor que siento por ti puede iluminar hasta la noche más oscura 🌙",
+            23: "No hay mejor regalo que tenerte en mi vida 🎁",
+            24: "Hoy empieza la magia de la Navidad, y tú eres parte de ella ✨",
+            25: "¡Feliz Navidad! Gracias por ser quien eres, aunque no pueda estar ahí contigo, te siento a mi lado todos los días🎄"
+        };
+
+        // Mostrar la fecha actual
+        const dateElement = document.getElementById('date');
+        const today = new Date();
+        const currentDay = today.getDate();
+        const currentMonth = today.getMonth() + 1;
+
+        if (currentMonth === 12 && currentDay >= 8) {
+            dateElement.textContent = `Hoy es: ${today.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}`;
+            const quoteElement = document.getElementById('quote');
+
+            if (messages[currentDay]) {
+                quoteElement.textContent = messages[currentDay];
+            } else {
+                quoteElement.textContent = "Espera a que llegue el día siguiente para más sorpresas 🎉";
+            }
+
+            // Mostrar mensaje emergente solo el día 8
+            if (currentDay === 8) {
+                alert("¡Bienvenida al Calendario de Adviento! Este calendario está diseñado exclusivamente para ti Lu, la página te va a mostrar un mensaje especial cada día desde el 8 hasta el 25 de diciembre. Disfruta de los pequeños detalles y de la magia de la Navidad. 🎄");
+            }
+        } else {
+            dateElement.textContent = "Este calendario solo está disponible del 8 al 25 de diciembre 🎄";
+            document.getElementById('quote').textContent = "";
+        }
+    </script>
+</body>
+</html>
