@@ -149,7 +149,7 @@
             20: "Tu bondad y ternura hacen el mundo un lugar mejor 🌟",
             21: "Si te sientes sola, recuerda que me tienes a mí, yo NUNCA me voy a ir 💫",
             22: "El amor que siento por ti puede iluminar hasta la noche más oscura 🌙",
-            23: "No hay mejor regalo que tenerte en mi vida 🎁",
+            23: "<a href='https://open.spotify.com/track/17QaupZy9aHptt1ZJXGc39?si=318660673a5b4095'>Click acá para escuchar el mensaje de hoy</a>",
             24: "Hoy empieza la magia de la Navidad, y tú eres parte de ella ✨",
             25: "¡Feliz Navidad! Gracias por ser quien eres, aunque no pueda estar ahí contigo, te siento a mi lado todos los días🎄"
         };
@@ -165,7 +165,7 @@
             const quoteElement = document.getElementById('quote');
 
             if (messages[currentDay]) {
-                quoteElement.textContent = messages[currentDay];
+                quoteElement.innerHTML = messages[currentDay];
             } else {
                 quoteElement.textContent = "Espera a que llegue el día siguiente para más sorpresas 🎉";
             }
